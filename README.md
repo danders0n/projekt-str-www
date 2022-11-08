@@ -1,6 +1,6 @@
 ## INFORMACJE
 
-Projekt zaliczeniowy z przedmiotu Projektowanie stron WWW. 
+Projekt zaliczeniowy z przedmiotu Projektowanie stron WWW . 
 Politechnika Krakowska, Fizyka Techniczna, IV semestr, 2022/2023
 
 ## WYMANIA

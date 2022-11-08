@@ -11,6 +11,19 @@
 </head>
 
 <body>
+<?php
+    // odpowiedziala za przeszukiwanie folderu projects
+    function getProjectList() {
+        $path = "projects";
+        $dir = new DirectoryIterator($path);
+        foreach ($dir as $fileinfo) {
+            if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+                echo '<li><a href="#">'.$fileinfo->getFilename().'</a></li>';
+            }
+        }
+    }
+    // *************************************************************
+?>
 <div class="wrapper">
     <header>
         <div class="logo">
@@ -23,17 +36,9 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">Zaloguj</a></li>
             <li><a href="#">Projekty</a>
-                <ul>
-                    <li><a href="#">No.01</a></li>
-                    <li><a href="#">No.02</a></li>
-                    <li><a href="#">No.03</a></li>
-                    <li><a href="#">No.04</a></li>
-                    <li><a href="#">No.05</a></li>
-                    <li><a href="#">No.06</a></li>
-                    <li><a href="#">No.07</a></li>
-                    <li><a href="#">No.08</a></li>
-                    <li><a href="#">No.09</a></li>
-                </ul>
+                <ul><?php
+                        getProjectList(); 
+                    ?></ul>
             </li>
             <li><a href="#">O nas</a></li>
             <li><a href="#">Kontakt</a></li>
@@ -48,7 +53,7 @@
     </div>
 
     <div class="footer">
-        Tytuł Strony &copy 2023<br>Co dzień z pamiątką nudnych postaci i zdarzeń Wracam do samotności, do książek - [do] marzeń.
+        Tytuł Strony &copy 2023<br>Co dzień z pamiątką nudnych postaci i zdarzeń. Wracam do samotności, do książek - [do] marzeń.
     </div>    
 </div>
 </body>
