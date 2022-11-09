@@ -1,8 +1,8 @@
 <?php
     session_start(); // wazne, podobno... xdd
 
-    include 'common\header.php';
-    include 'common\nav.php';
+    include 'components\header.php';
+    include 'components\nav.php';
 ?>
 
     <div class="content">
@@ -12,4 +12,4 @@
         <p>Nunc sit amet dignissim eros. Aliquam at placerat nulla, sit amet viverra metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc venenatis id nulla et finibus. Suspendisse in leo tempor, tristique dolor sodales, placerat diam. Ut et tortor in velit hendrerit ullamcorper. Integer vulputate lectus pellentesque velit dignissim, at ultrices ipsum auctor. Fusce convallis ipsum at erat vulputate laoreet vel in est. Vestibulum in nibh et dolor tempus ornare ac sodales nisi. Proin fringilla justo nec egestas ornare.</p>
     </div>
     
-<?php include 'common\footer.php'; ?>
+<?php include 'components\footer.php'; ?>

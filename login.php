@@ -1,15 +1,18 @@
 <?php
-    include 'common/header.php';
-    include 'common/nav.php';
+    include 'components/header.php';
+    include 'components/nav.php';
 ?>
 <div class="content">
-    <div class="login" style="margin: auto; width: 512px; height: 256px; border: 1px solid;">
-        <h2>Login</h2>
+    <div class="login"">
         <form>
+            Login:
             <input type="text" name="username" id="username" required>
+            <br><br>
+            Hasło:
             <input type="password" name="password" id="password" required>
-            <input type="submit" value="Login">
+            <br><br>
+            <input type="submit" value="Zaloguj się">
         </form>
     </div>
 </div>
-<?php include 'common/footer.php'; ?>
+<?php include 'components/footer.php'; ?>
