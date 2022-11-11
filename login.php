@@ -1,6 +1,7 @@
 <?php
     include 'components/header.php';
     include 'components/nav.php';
+	//ada tu byla
 ?>
 <div class="content">
     <div class="login"">
