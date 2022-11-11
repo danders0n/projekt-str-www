@@ -14,6 +14,12 @@
                 ?></ul>
         </li>
         <li><a href="contact.php">Kontakt</a></li>
-        <li><a href="login.php">Zaloguj</a></li>
+        <li><?php
+            if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
+                echo '<a href="logout.php">Wyloguj</a>';
+            } else {
+                echo '<a href="login.php">Zaloguj</a>';
+            }
+        ?></li>
     <ol>
 </div>

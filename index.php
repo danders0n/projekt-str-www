@@ -3,6 +3,13 @@
 
     include 'components\header.php';
     include 'components\nav.php';
+
+    $_SESSION['logged'] = true; //temp
+
+    if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
+        include 'components\panel.php';
+    }
+    
 ?>
 
     <div class="content">
