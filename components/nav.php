@@ -1,19 +1,12 @@
 <div class="nav">
     <ol>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="about.php">O nas</a></li>
+        <li><a href=<?php echo $abs_path."/index.php"; ?>>Home</a></li>
+        <li><a href=<?php echo $abs_path."/about.php"; ?>>O nas</a></li>
         <li><a href="#">Projekty</a>
-            <ul><?php
-                    $path = "projects";
-                    $dir = new DirectoryIterator($path);
-                    foreach ($dir as $fileinfo) {
-                        if ($fileinfo->isDir() && !$fileinfo->isDot()) {
-                            echo '<li><a href="#">'.$fileinfo->getFilename().'</a></li>';
-                        }
-                    }
+            <ul><?php  
                 ?></ul>
         </li>
-        <li><a href="contact.php">Kontakt</a></li>
+        <li><a href=<?php echo $abs_path."/contact.php"; ?>>Kontakt</a></li>
         <li><?php
             if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
                 echo '<a href="logout.php">Wyloguj</a>';

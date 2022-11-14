@@ -7,21 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Daj dlugopis bedzie opis">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <?php
-    session_start();
-    $_SESSION['logged'] = true; //temp
-    
-    include 'components/header.php';
-    include 'components/nav.php';
-    
+    session_start(); // wazne, podobno... xdd
+
+    include '../components/header.php';
+    include '../components/nav.php';
+
     // jezeli zalogowany dodaj opcje admina
     if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
-        include 'admin/nav-admin.php';
-    }
+        include 'nav-admin.php';
+    } else {
+        header("Location: ../index.php");
+        exit();
+    };
 ?>
     <div class="content">
-       Contact page here...
-    </div>
-<?php include 'components/footer.php'; ?>
+       Change Theme here...
+    </div>  
+<?php include '../components/footer.php'; ?>

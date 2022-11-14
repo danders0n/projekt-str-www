@@ -1,17 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+    <title>Projekt zaliczeniowy</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Daj dlugopis bedzie opis">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
 <?php
-    session_start(); // wazne, podobno... xdd
-
-    include 'components\header.php';
-    include 'components\nav.php';
-
+    session_start();
     $_SESSION['logged'] = true; //temp
 
-    if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
-        include 'components\panel.php';
-    }
-    
-?>
+    include 'components/header.php';
+    include 'components/nav.php';
 
+    // jezeli zalogowany dodaj opcje admina
+    if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
+        include 'admin/nav-admin.php';
+    }
+?>
     <div class="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra lobortis turpis id fringilla. Praesent lectus tellus, luctus et molestie et, consectetur ut justo. Praesent congue euismod rutrum. Maecenas non nisl euismod, fringilla diam eget, mollis purus. Integer in odio enim. Proin in lacinia augue. Duis lobortis tincidunt neque et placerat. Vestibulum vel nulla in arcu vestibulum ultricies. Fusce quis tincidunt urna, ac vehicula ex. Mauris ultricies cursus urna, nec facilisis lorem dapibus nec. Etiam ut sagittis leo, vel viverra ligula. Etiam egestas feugiat ex vitae imperdiet. Nunc vel quam vel justo molestie faucibus.</p>
         <p>Cras vulputate fermentum tincidunt. Suspendisse laoreet non ante et accumsan. Duis euismod quam nec turpis faucibus, nec faucibus diam dictum. Morbi vitae rhoncus mi, a vestibulum libero. Morbi condimentum pulvinar risus, non laoreet sapien maximus quis. Suspendisse ac convallis ligula, a elementum sem. Vestibulum ac arcu enim. Donec consectetur metus sed luctus interdum. Sed in mattis lorem. Vivamus eros orci, porttitor in gravida vitae, efficitur et nulla. Curabitur imperdiet metus vitae libero porta, sit amet ultricies orci convallis.</p>
@@ -19,4 +28,4 @@
         <p>Nunc sit amet dignissim eros. Aliquam at placerat nulla, sit amet viverra metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc venenatis id nulla et finibus. Suspendisse in leo tempor, tristique dolor sodales, placerat diam. Ut et tortor in velit hendrerit ullamcorper. Integer vulputate lectus pellentesque velit dignissim, at ultrices ipsum auctor. Fusce convallis ipsum at erat vulputate laoreet vel in est. Vestibulum in nibh et dolor tempus ornare ac sodales nisi. Proin fringilla justo nec egestas ornare.</p>
     </div>
     
-<?php include 'components\footer.php'; ?>
+<?php include 'components/footer.php'; ?>
