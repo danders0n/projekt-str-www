@@ -27,5 +27,4 @@
         <p>Donec at lobortis sem. Vestibulum ut mauris eget est fringilla sollicitudin tincidunt sed dui. Etiam id elementum lorem. Donec id libero sagittis, eleifend orci a, sagittis nisl. Curabitur quis orci vitae mauris sagittis varius sollicitudin vel velit. Etiam lorem leo, egestas in justo vel, porttitor pulvinar est. Nulla sit amet commodo velit, eu fermentum est. Ut libero justo, tincidunt eget suscipit sed, efficitur eu nulla. Nullam id lectus urna.</p>
         <p>Nunc sit amet dignissim eros. Aliquam at placerat nulla, sit amet viverra metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc venenatis id nulla et finibus. Suspendisse in leo tempor, tristique dolor sodales, placerat diam. Ut et tortor in velit hendrerit ullamcorper. Integer vulputate lectus pellentesque velit dignissim, at ultrices ipsum auctor. Fusce convallis ipsum at erat vulputate laoreet vel in est. Vestibulum in nibh et dolor tempus ornare ac sodales nisi. Proin fringilla justo nec egestas ornare.</p>
     </div>
-    
 <?php include 'components/footer.php'; ?>

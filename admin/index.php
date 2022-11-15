@@ -8,6 +8,7 @@
     <meta name="description" content="Daj dlugopis bedzie opis">
 
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles-admin.css">
 </head>
 <?php
     session_start(); // wazne, podobno... xdd
@@ -24,6 +25,8 @@
     };
 ?>
     <div class="content">
-       Admin Panel
+    <?php
+
+    ?>
     </div>
 <?php include '../components/footer.php'; ?>

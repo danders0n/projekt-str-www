@@ -1,0 +1,14 @@
+.form {
+    float: left;
+    padding: 12px;
+}
+
+form > fieldset > textarea {
+    padding: 12px;
+    width: 1020px;
+    height: 512px;
+}
+
+form > fieldset > input[type=submit] {
+    float: right;
+}
