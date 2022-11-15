@@ -25,26 +25,26 @@
     };
 ?>
     <div class="content">
-    <form>
+    <form action="page.php" method="post">
         <fieldset>
             <legend>Informacje:</legend>
             <div class="form">
                 <label for="title">Tytuł:</label><br>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" value="project-01" required>
             </div>
             <div class="form">
                 <label for="author">Autor:</label><br>
-                <input type="text" id="author" name="author">
+                <input type="text" id="author" name="author" value="admin" required>
             </div>
             <div class="form">
                 <label for="description">Opis:</label><br>
-                <input type="text" id="description" name="description">
+                <input type="text" id="description" name="description" value="short desc">
             </div>   
         </fieldset>
         <br>
         <fieldset>
             <legend>Edytor:</legend>
-            <textarea name="message"></textarea>
+            <textarea name="content"></textarea>
         </fieldset>
         <br>
         <fieldset>
@@ -53,4 +53,33 @@
         </fieldset>
     </form>
     </div>   
-<?php include '../components/footer.php'; ?>
+<?php 
+    include '../components/footer.php';
+
+    if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
+        if ((isset($_POST['title'])) && (isset($_POST['author'])) && (isset($_POST['description'])) && (isset($_POST['content']))) {
+            
+            $title   = $_POST['title'];
+            $author  = $_POST['author'];
+            $desc    = $_POST['description'];
+            $content = $_POST['content'];
+
+            $template = "x";
+            
+            $pagePath = $root.$abs_path.'/projects/'.$title;
+            if(is_dir($pagePath)){
+               //echo '<script>alert("Strona o takiej nazwie już istnienie!");</script>'; 
+            } else {
+                mkdir($pagePath, 0777, true);
+                $page = fopen($pagePath.'/index.html', 'x');
+                
+                fwrite($page, $template);
+
+                fclose($page);
+            }
+        }
+    } else {
+        header("Location: ../index.php");
+        exit();
+    };
+?>
