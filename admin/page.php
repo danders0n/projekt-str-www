@@ -16,7 +16,7 @@
     include '../components/header.php';
     include '../components/nav.php';
 
-    // generates strings from forms into index.html
+    // generates strings from forms into index.php
     function createPage($pageTitle, $pageAuthor, $pageDesc, $pageContent) {
         $str = "";
 
@@ -25,34 +25,15 @@
             "<!DOCTYPE HTML>\n<html lang=\"pl\">\n<head>\n\t<title>", 
             "</title>\n\t<meta charset=\"utf-8\">\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\t<meta name=\"author\" content=\"",
             "\">\n\t<meta name=\"description\" content=\"",
-            "\">\n\t<link rel=\"stylesheet\" href=\"/projekt-str-www/styles.css\">\n\t<link rel=\"stylesheet\" href=\"/projekt-str-www//admin/styles-admin.css\">\n</head>\n",
+            "\">\n\t<link rel=\"stylesheet\" href=\"/projekt-str-www/styles.css\">\n\t<link rel=\"stylesheet\" href=\"/projekt-str-www/admin/styles-admin.css\">\n</head>\n",
         );
-        $head_str = $head_arr[0].$pageTitle.$head_arr[1].$pageAuthor.$head_arr[2].$pageDesc.$head_arr[3];
+        $head_str = '<?php session_start();?>'.$head_arr[0].$pageTitle.$head_arr[1].$pageAuthor.$head_arr[2].$pageDesc.$head_arr[3];
         // *************************************************************
 
-        // logo generator
-        $logo_arr = array(
-            "<body>\n<div class=\"wrapper\">\n\t<div class=\"header\">\n\t\t<div class=\"logo\">\n\t\t\t",
-            "\n\t\t</div>\n\t</div>\n"
-        );
-        $logo_str = $logo_arr[0]."LOGO".$logo_arr[1];
-        // *************************************************************
+        $logo_str = "<?php include \$_SERVER['DOCUMENT_ROOT'].\$_SESSION['abs_path'].'/components/header.php';?>";
+        $nav_str = "<?php include \$_SERVER['DOCUMENT_ROOT'].\$_SESSION['abs_path'].'/components/nav.php';?>";
 
-        //nav generator
-        $nav_arr = array(
-            "\t<div class=\"nav\">\n\t\t<ol>\n\t\t\t<li><a href=/projekt-str-www/index.php>Home</a></li>\n\t\t\t<li><a href=/projekt-str-www/about.php>O nas</a></li>\n",
-            "\t\t\t<li>\n\t\t\t\t<a href=\"#\">Projekty</a>\n\t\t\t\t<ul>\n",
-            "\t\t\t\t</ul>\n\t\t\t</li>\n\t\t\t<li><a href=/projekt-str-www/contact.php>Kontakt</a></li>\n\t\t\t<li>",
-            "</li>\n",
-            "\t\t<ol>\n\t</div>\n"
-        );
-        $nav_str = $nav_arr[0].$nav_arr[1]."\t\t\t\t\tGet some\n".$nav_arr[2]."placeholder".$nav_arr[3].$nav_arr[4];
-        // *************************************************************
-
-        //TODO: 
-        // 1. if logged user generate admin menu 
-        // 2. convert text into html marks
-        // 3. create appropriate login/logout in nav menu
+        $nav_admin_str = "<?php if(isset(\$_SESSION['logged']) && (\$_SESSION['logged'] == true)) {include \$_SERVER['DOCUMENT_ROOT'].\$_SESSION['abs_path'].'/admin/nav-admin.php';}?>";
 
         //content generator 
         $content_arr = array (
@@ -63,14 +44,9 @@
         // *************************************************************
 
         //footer generator
-        $footer_arr = array (
-            "\t<div class=\"footer\">\n\t\t\t",
-            "\n\t</div>\n</div>\n</body>\n</html>"
-        );
-        $footer_str = $footer_arr[0]."Tytuł Strony © 2023<br>Co dzień z pamiątką nudnych postaci i zdarzeń. Wracam do samotności, do książek - [do] marzeń.".$footer_arr[1];
-        // *************************************************************
+        $footer_str = "<?php include \$_SERVER['DOCUMENT_ROOT'].\$_SESSION['abs_path'].'/components/footer.php';?>";
 
-        $str = $head_str.$logo_str.$nav_str.$content_str.$footer_str;
+        $str = $head_str.$logo_str.$nav_str.$nav_admin_str.$content_str.$footer_str;
         return $str;
     }
     // *************************************************************
@@ -86,16 +62,17 @@
             $desc    = $_POST['description'];
             $content = $_POST['content'];
         
-            $pagePath = $root.$abs_path.'/projects/'.$title;
+            $pagePath = $_SERVER['DOCUMENT_ROOT'].$_SESSION['abs_path'].'/projects/'.$title;
             if(is_dir($pagePath)){
                echo '<br><center>Strona o takiej nazwie już istnienie!</center>'; 
             } else {
                 mkdir($pagePath, 0777, true);
                 
-                $page = fopen($pagePath.'/index.html', 'w');
+                $page = fopen($pagePath.'/index.php', 'w');
                 fwrite($page, createPage($title, $author, $desc, $content));
                 fclose($page);
                 echo '<br><center>Strona utworzona!</center>'; 
+                Header('Location: '.$_SERVER['PHP_SELF']);
             }
         }
     } else {
