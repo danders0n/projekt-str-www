@@ -88,6 +88,13 @@
 
                     // check if valid add user to db
                     if($valid == true){
+                        //add into logs
+                        $sql = "INSERT INTO logs (type, author, msg)
+                        VALUES ('ADD_USER', '".$username."', 'User ".$username." was created')";
+                        $result = $conn->query($sql);
+                        if(!$result) throw new Exception($conn->error);
+                        
+                        //add into users
                         $sql = "INSERT INTO users (username, password)
                         VALUES ('".$username."', '".$password."')";
                         if($conn->query($sql)) {

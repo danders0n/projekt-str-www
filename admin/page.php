@@ -77,11 +77,18 @@
                 if($conn->connect_errno!=0) {
                     throw new Exception(mysqli_connect_errno());
                 } else {
+                    // add into logs
+                    $sql = "INSERT INTO logs (type, author, msg)
+                            VALUES ('ADD_PROJECT', '".$author."', 'Project: ".$title." was added in: ".$pagePath."')";
+                    $result = $conn->query($sql);
+                    if(!$result) throw new Exception($conn->error);
+                    
+                    //add into projects lists
                     $sql = "INSERT INTO projects (title, author, directory)
                             VALUES ('".$title."', '".$author."', '".$pagePath."')";
                     $result = $conn->query($sql);
                     if(!$result) throw new Exception($conn->error);
-                    //...
+                    
 
                     $conn->close();
                 }

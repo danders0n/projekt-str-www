@@ -31,6 +31,40 @@
             unset($_SESSION['useradded']);
         }
     ?>
+        <div id="logs">
+            <table>
+                <caption><b>Wydarzenia:</b></caption>
+                <tr>
+                    <th>ID:</th>
+                    <th>Typ:</th>
+                    <th>Autor:</th>
+                    <th>Wiadomość:</th>
+                    <th>Czas:</th>
+                </tr>
+            <?php 
+                require_once '../components/connect.php';
+
+                $conn = new mysqli($GLOBALS['host'], $GLOBALS['db_username'], $GLOBALS['db_password'], $GLOBALS['db_name']);
+                if($conn->connect_errno!=0) {
+                    throw new Exception(mysqli_connect_errno());
+                } else {
+                    $sql = 'SELECT id, type, author, msg, date FROM logs';
+                    $result = $conn->query($sql);
+                    if(!$result) throw new Exception($conn->error);
+
+                    while($row = $result->fetch_assoc())
+                    {
+                        echo "\t\t\t\t<tr>\n\t\t\t\t\t<td>".$row["id"]."</td>\n";
+                        echo "\t\t\t\t\t<td>".$row["type"]."</td>";
+                        echo "\t\t\t\t\t<td>".$row["author"]."</td>";
+                        echo "\t\t\t\t\t<td>".$row["msg"]."</td>";
+                        echo "\n\t\t\t\t\t<td>".$row["date"]."</td>\n\t\t\t\t</tr>\n";
+                    }
+                    $conn->close();
+                }
+            ?>
+            </table>
+        </div>
         <div id="pages">
         <table>
                 <caption><b>Lista dodanych projektów:</b></caption>
