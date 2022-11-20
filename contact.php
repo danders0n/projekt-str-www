@@ -11,7 +11,6 @@
 </head>
 <?php
     session_start();
-    $_SESSION['logged'] = true; //temp
     
     include 'components/header.php';
     include 'components/nav.php';

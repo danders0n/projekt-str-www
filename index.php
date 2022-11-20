@@ -10,15 +10,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <?php
+    require_once "components/connect.php";
+
     session_start();
     $_SESSION['logged'] = true; //temp
 
     include 'components/header.php';
     include 'components/nav.php';
 
-    // jezeli zalogowany dodaj opcje admina
-    if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
-        include 'admin/nav-admin.php';
+    // check if webside have access to db
+    if((!isset($host)) && (!isset($db_username)) && (!isset($db_name))) {
+        header("Location: install.php");
+        exit();
+    } else {
+        // if logged add admin menu
+        if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
+            include 'admin/nav-admin.php';
+        }
     }
 ?>
     <div class="content">
