@@ -26,7 +26,10 @@
 ?>
     <div class="content">
     <?php
-
+        if(isset($_SESSION['useradded'])) {
+            echo '<div class="msg"></div>';
+            unset($_SESSION['useradded']);
+        }
     ?>
     </div>
 <?php include '../components/footer.php'; ?>
