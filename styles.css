@@ -136,6 +136,7 @@ body {
     text-align: justify;
     padding-top: 16px;
     padding-bottom: 16px;
+    overflow: auto;
 }
 
 /* login page */

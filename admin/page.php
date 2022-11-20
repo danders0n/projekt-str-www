@@ -61,12 +61,31 @@
             $author  = $_POST['author'];
             $desc    = $_POST['description'];
             $content = $_POST['content'];
+
+            $str = $name = str_replace(' ', '_', $title);
         
-            $pagePath = $_SERVER['DOCUMENT_ROOT'].$_SESSION['abs_path'].'/projects/'.$title;
+            $pagePath = $_SERVER['DOCUMENT_ROOT'].$_SESSION['abs_path'].'/projects/'.$str;
             if(is_dir($pagePath)){
                echo '<br><center>Strona o takiej nazwie już istnienie!</center>'; 
             } else {
                 mkdir($pagePath, 0777, true);
+
+                //db entry
+                require_once '../components/connect.php';
+
+                $conn = new mysqli($GLOBALS['host'], $GLOBALS['db_username'], $GLOBALS['db_password'], $GLOBALS['db_name']);
+                if($conn->connect_errno!=0) {
+                    throw new Exception(mysqli_connect_errno());
+                } else {
+                    $sql = "INSERT INTO projects (title, author, directory)
+                            VALUES ('".$title."', '".$author."', '".$pagePath."')";
+                    $result = $conn->query($sql);
+                    if(!$result) throw new Exception($conn->error);
+                    //...
+
+                    $conn->close();
+                }
+                // *********************** 
                 
                 $page = fopen($pagePath.'/index.php', 'w');
                 fwrite($page, createPage($title, $author, $desc, $content));

@@ -2,13 +2,49 @@
     float: left;
     padding: 12px;
 }
-
 form > fieldset > textarea {
     padding: 12px;
     width: 1020px;
     height: 512px;
 }
-
 form > fieldset > input[type=submit] {
     float: right;
+}
+
+#msg {
+    text-align: center;
+    border: 1px solid;
+    padding: 6px;
+    margin: 6px;
+    max-height: 512px;
+}
+
+#pages{
+    float: left;
+    width: 64%;
+    border: 1px solid;
+    padding: 6px;
+    margin: 6px;
+    max-height: 512px;
+}
+
+#users{
+    float: left;
+    width: 31%;
+    border: 1px solid;
+    padding: 6px;
+    margin: 6px;
+    max-height: 512px;
+}
+
+table {
+    border: 1px solid;
+    width: 100%;
+    text-align: center;
+}
+table th, td{
+    border: 1px solid;
+}
+table > caption {
+    padding-bottom: 4px;
 }
