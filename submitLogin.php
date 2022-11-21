@@ -14,9 +14,20 @@ else{
     $username=$_POST['username'];
     $password=$_POST['password'];
 
-//  sql = "SELECT * FROM nazwa_tabeli WHERE nazwa_kolumny1 = '$username' AND nazwa_kolumny2 = '$password'";
-//  if ($answear=$conn->query($sql)){$users_no = $answear->num_rows};
-//  if($users_no==1){}
+    $sql = "SELECT username, password FROM users WHERE username = '$username' AND password = '$password'";
+    if ($answear=$conn->query($sql)){
+        $users_no = $answear->num_rows;
+    }
+    if($users_no==1){
+        $line = $answear->fetch_assoc();
+        $username = $line['username'];
+
+        $answear->free_result();
+        //header('Location: ...')
+    }
+    else{
+        // brak osoby o tym loginie i haśle
+    }
 
     $conn->close();
 }
