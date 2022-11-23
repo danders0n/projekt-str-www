@@ -10,19 +10,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <?php
-    require_once "components/connect.php";
 
-    session_start();
-    $_SESSION['logged'] = true; //temp
-
-    include 'components/header.php';
-    include 'components/nav.php';
-
-    // check if webside have access to db
-    if((!isset($host)) && (!isset($db_username)) && (!isset($db_name))) {
-        header("Location: install.php");
+    if(!file_exists('components/connect.php')) {
+        header("Location: new-install.php?step=1");
         exit();
     } else {
+        require_once "components/connect.php";
+        session_start();
+
+        //conn test
+        $conn = new mysqli($host, $db_username, $db_password, $db_name);
+        if($conn->connect_errno!=0) {
+            throw new Exception(mysqli_connect_errno());
+        }
+        $conn->close();
+
+        $_SESSION['logged'] = true; //temp
+    
+        include 'components/header.php';
+        include 'components/nav.php';
+
         // if logged add admin menu
         if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
             include 'admin/nav-admin.php';
