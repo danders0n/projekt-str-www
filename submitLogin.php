@@ -1,6 +1,13 @@
 <?php
+/* czy dodane wszędzie, gdzie trzeba sprawdzenie, $_SESSION['logged'], czy zabraniać dostęp do stron jak niezalogowane (jak poniżej), 
+czy wtedy tylko brak opcji admina? */
 
-require_once "connect.php";
+/* 
+if(!isset($_SESSION['logged'])) {
+    header('Location: about.php'); 
+    exit();
+} */
+require_once "connect.php"; //halko halko gdzie ten pliczor policja
 
 // Tworzenie polaczenia
 $conn = new mysqli($servername, $username, $password);
