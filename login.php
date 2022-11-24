@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) { // jeśli zalogowana, przejdż do strony about.php bez wykonywania reszty
+        header('Location: about.php');
+        exit();
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -32,6 +36,9 @@
     </div>
 </div>
 <?php 
-    if(isset($_SESSION['invalid_password'])) echo $_SESSION['blad']
+    if(isset($_SESSION['invalid_password'])) // powiadomienie o błędnym haśle
+    {
+        echo $_SESSION['blad'];
+    }
     include 'components/footer.php'; 
 ?>

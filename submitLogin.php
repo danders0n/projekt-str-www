@@ -18,7 +18,10 @@ else{
     if ($answear=$conn->query($sql)){
         $users_no = $answear->num_rows;
     }
-    if($users_no==1){
+    if($users_no==1){ // sprawdzanie, czy znajduje się (jedna) osoba o tych danych w DB
+
+        $_SESSION['logged'] = true;
+
         $line = $answear->fetch_assoc();
         $username = $line['username'];
 
@@ -26,7 +29,7 @@ else{
         $answear->free_result();
         header('Location: about.php');
     }
-    else{
+    else{ // jeśli nie, ustawiona zmienna invalid_password i przeniesienie do strony logowania
         $_SESSION['invalid_password'] = '<span style="color:red">Invalid username or password.</span>';
         header('Location: login.php');
     }
