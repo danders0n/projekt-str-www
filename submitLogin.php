@@ -22,11 +22,13 @@ else{
         $line = $answear->fetch_assoc();
         $username = $line['username'];
 
+        unset($_SESSION['invalid_password']);
         $answear->free_result();
-        //header('Location: ...')
+        header('Location: about.php');
     }
     else{
-        // brak osoby o tym loginie i haśle
+        $_SESSION['invalid_password'] = '<span style="color:red">Invalid username or password.</span>';
+        header('Location: login.php');
     }
 
     $conn->close();

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -27,4 +31,7 @@
         </form>
     </div>
 </div>
-<?php include 'components/footer.php'; ?>
+<?php 
+    if(isset($_SESSION['invalid_password'])) echo $_SESSION['blad']
+    include 'components/footer.php'; 
+?>
