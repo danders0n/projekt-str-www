@@ -15,43 +15,52 @@ if((!isset($_POST['username'])) || (!isset($_POST['password']))){
     exit();
 }
 
-require_once "connect.php"; //halko halko gdzie ten pliczor policja
+require_once "components/connect.php"; //halko halko gdzie ten pliczor policja
 
 // Tworzenie polaczenia
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($host, $db_username, $db_password, $db_name);
 
 // sprawdzanie polaczenia
 if ($conn->connect_error!=0) {
     die("Connection failed: " . $conn->connect_error);
 }
 else{
-    // echo "Connected successfully";
+    //echo "Connected successfully";
     $username=$_POST['username'];
     $password=$_POST['password'];
 
     // ochrona przed 'wstrzykiwaniem SQL'
-    $username=htmlentities($login, ENT_QUOTES, "UTF-8");
-    $username=htmlentities($password, ENT_QUOTES, "UTF-8");
+    $username=htmlentities($username, ENT_QUOTES, "UTF-8");
+    $password=htmlentities($password, ENT_QUOTES, "UTF-8");
 
-    $sql = ;
-    if ($answear=$conn->query(sprintf("SELECT username, password FROM users WHERE username = '%s AND password = '$%s'",
-    mysqli_real_escape_string($conn,$username), mysqli_real_escape_string($conn,$password))))   {
+    $answear = $conn->query(sprintf("SELECT username, password FROM users WHERE username = '%s'", 
+    mysqli_real_escape_string($conn,$username)));
+
+    if(!$answear) throw new Exception($conn->error);
+    if ($answear)   {
         $users_no = $answear->num_rows;
+        //echo $users_no;
         if($users_no==1){ // sprawdzanie, czy znajduje się (jedna) osoba o tych danych w DB
 
-            $_SESSION['logged'] = true;
-
             $line = $answear->fetch_assoc();
-            $username = $line['username'];
+            $hash = $line['password'];
+            if (password_verify($password, $hash)) {
+                echo "Haseła się zgadzają podobno...";
+                $_SESSION['logged'] = true;
 
-            unset($_SESSION['invalid_password']);
-            $answear->free_result();
-            header('Location: about.php');
-        }
-        else { // jeśli nie, ustawiona zmienna invalid_password i przeniesienie do strony logowania
-            $_SESSION['invalid_password'] = '<span style="color:red">Invalid username or password.</span>';
+                $username = $line['username'];
+
+                unset($_SESSION['err_login']);
+                $answear->free_result();
+                header('Location: index.php');
+            } else {       
+                $_SESSION['err_login'] = '<span style="color:red">Invalid username or password.</span>';
             header('Location: login.php');
             }
+        } else { // jeśli nie, ustawiona zmienna invalid_password i przeniesienie do strony logowania
+            $_SESSION['err_login'] = '<span style="color:red">Invalid username or password.</span>';
+                header('Location: login.php');
+        }
     }
 
     $conn->close();

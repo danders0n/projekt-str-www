@@ -25,7 +25,7 @@
         }
         $conn->close();
 
-        $_SESSION['logged'] = true; //temp
+        //$_SESSION['logged'] = true; //temp
     
         include 'components/header.php';
         include 'components/nav.php';

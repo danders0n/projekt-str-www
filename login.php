@@ -25,6 +25,12 @@
 <div class="content">
     <div class="login">
         <form action="submitLogin.php" method="post">
+            <?php     
+                if(isset($_SESSION['err_login'])) // powiadomienie o błędnym haśle
+                {
+                    echo $_SESSION['err_login']."<br><br>";
+                }
+            ?>
             Login:
             <input type="text" name="username" id="username" required>
             <br><br>
@@ -35,10 +41,4 @@
         </form>
     </div>
 </div>
-<?php 
-    if(isset($_SESSION['invalid_password'])) // powiadomienie o błędnym haśle
-    {
-        echo $_SESSION['blad'];
-    }
-    include 'components/footer.php'; 
-?>
+<?php include 'components/footer.php'; ?>

@@ -25,9 +25,9 @@ function getProjectList(){
         <li><a href=<?php echo $_SESSION['abs_path']."/contact.php"; ?>>Kontakt</a></li>
         <li><?php
             if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)) {
-                echo '<a href="logout.php">Wyloguj</a>';
+                echo '<a href="'.$_SESSION['abs_path'].'/logout.php">Wyloguj</a>';
             } else {
-                echo '<a href="login.php">Zaloguj</a>';
+                echo '<a href="'.$_SESSION['abs_path'].'/login.php">Zaloguj</a>';
             }
         ?></li>
     <ol>
